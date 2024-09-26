@@ -5,6 +5,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/nav_quotes_day">
 
+
     <fragment
         android:id="@+id/nav_quotes_day"
         android:name="ph.edu.auf.navigationdrawerlesson.fragments.QuotesOfTheDayFragment"
@@ -18,9 +19,9 @@
 
     <fragment
         android:id="@+id/nav_fave_quotes"
-        android:name="ph.edu.auf.navigationdrawerlesson.fragments.FaveQuotesFragment"
+        android:name="ph.edu.auf.navigationdrawerlesson.fragments.FavoriteQuotesFragment"
         android:label="Favourite Quote"
-        tools:layout="@layout/fragment_fave_quotes" />
+        tools:layout="@layout/fragment_favorite_quotes" />
 
 
 </navigation>

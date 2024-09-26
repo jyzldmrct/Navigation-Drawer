@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".fragments.QuotesOfTheDayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quote of the day"
-        android:textSize="20sp"
+        android:fontFamily="font/liquid night"
+        android:text="@string/quote_of_the_day"
+        android:textSize="30sp"
         android:textStyle="bold"
+        android:textColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,11 +27,34 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:padding="20dp"
-        android:textSize="16sp"
+        android:textSize="25sp"
         android:textAlignment="center"
-        android:text="In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine. - Maya Angelou"
+        android:fontFamily="@font/tarotheque"
+        android:text="In all the world, there is no heart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <!-- Button to randomize quote -->
+    <Button
+        android:id="@+id/btn_randomize_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Randomize Quote"
+        app:layout_constraintTop_toBottomOf="@id/txt_quote_of_day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <!-- Button to save/remove favorite -->
+    <Button
+        android:id="@+id/btn_favorite_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save to Favorites"
+        app:layout_constraintTop_toBottomOf="@id/btn_randomize_quote"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

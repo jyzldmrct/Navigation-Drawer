@@ -1,24 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group>
+    <group
+        app:itemIconTint="@color/blue"
+        app:itemTextColor="@color/blue">
         <item
             android:id="@+id/nav_quotes_day"
-            android:title="Quotes of the day"
-            android:icon="@drawable/ic_home"
-            />
+            android:title="Quote of the Day"
+            android:icon="@drawable/favorite"
+            android:background="@drawable/nav_item_bg" />
+
+        <item
+            android:id="@+id/nav_motivational_quotes"
+            android:title="Motivational Quotes"
+            android:icon="@drawable/motivational"
+            android:background="@drawable/nav_item_bg" />
+
+        <item
+            android:id="@+id/nav_inspiring_quotes"
+            android:title="Inspiring Quotes"
+            android:icon="@drawable/inspiring"
+            android:background="@drawable/nav_item_bg" />
+
         <item
             android:id="@+id/nav_love_quotes"
-            android:title="Love quotes"
-            android:icon="@drawable/ic_love_quotes"
-            />
+            android:title="Love Quotes"
+            android:icon="@drawable/lovequotes"
+            android:background="@drawable/nav_item_bg" />
+
         <item
             android:id="@+id/nav_fave_quotes"
-            android:title="Fave quotes"
-            android:icon="@drawable/ic_save"
-            />
+            android:title="Favorite Quotes"
+            android:icon="@drawable/favorite"
+            android:background="@drawable/nav_item_bg" />
     </group>
 
 </menu>
