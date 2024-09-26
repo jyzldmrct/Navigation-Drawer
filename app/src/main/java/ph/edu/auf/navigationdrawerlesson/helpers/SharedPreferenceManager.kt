@@ -7,6 +7,8 @@ import ph.edu.auf.navigationdrawerlesson.NavigationDrawerLessonApplication
 object SharedPreferenceManager {
     private const val PREFERENCE_NAME = "MyAppPreference"
 
+
+
     private val sharedPreferences : SharedPreferences by lazy {
         NavigationDrawerLessonApplication.context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
     }

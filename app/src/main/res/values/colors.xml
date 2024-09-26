@@ -7,4 +7,9 @@
     <color name="green">#00FF12</color>
     <color name="light_blue">#668DFF</color>
     <color name="dark_blue">#001657</color>
+    <color name="light_purple">#B39DDB</color>
+    <color name="dark_purple">#570987</color>
+    <color name="light_orange">#FFB74D</color>
+    <color name="dark_orange">#FF6F00</color>
+
 </resources>

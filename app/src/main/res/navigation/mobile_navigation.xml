@@ -3,25 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_quotes_day">
-
+    app:startDestination="@id/nav_home">
 
     <fragment
         android:id="@+id/nav_quotes_day"
         android:name="ph.edu.auf.navigationdrawerlesson.fragments.QuotesOfTheDayFragment"
         android:label="Quotes of the day"
         tools:layout="@layout/fragment_quotes_of_the_day" />
+
     <fragment
         android:id="@+id/nav_love_quotes"
         android:name="ph.edu.auf.navigationdrawerlesson.fragments.LoveQuotesFragment"
-        android:label="Love quotes\"
+        android:label="Love quotes"
         tools:layout="@layout/fragment_love_quotes" />
 
     <fragment
         android:id="@+id/nav_fave_quotes"
         android:name="ph.edu.auf.navigationdrawerlesson.fragments.FavoriteQuotesFragment"
         android:label="Favourite Quote"
-        tools:layout="@layout/fragment_favorite_quotes" />
+        tools:layout="@layout/fragment_favorites_quotes" />
 
+    <fragment
+        android:id="@+id/nav_inspiring_quotes"
+        android:name="ph.edu.auf.navigationdrawerlesson.fragments.InspiringQuotesFragment"
+        android:label="Inspiring Quotes"
+        tools:layout="@layout/fragment_inspiring_quotes" />
+
+    <fragment
+        android:id="@+id/nav_motivational_quotes"
+        android:name="ph.edu.auf.navigationdrawerlesson.fragments.MotivationalQuotesFragment"
+        android:label="Motivational Quotes"
+        tools:layout="@layout/fragment_motivational_quotes" />
+
+    <fragment
+        android:id="@+id/nav_header"
+        android:name="ph.edu.auf.navigationdrawerlesson.fragments.NavHeaderFragment"
+        android:label="Nav Header"
+        tools:layout="@layout/nav_header" />
+
+    <fragment
+        android:id="@+id/nav_main_activity"
+        android:name="ph.edu.auf.navigationdrawerlesson.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="ph.edu.auf.navigationdrawerlesson.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
 
 </navigation>

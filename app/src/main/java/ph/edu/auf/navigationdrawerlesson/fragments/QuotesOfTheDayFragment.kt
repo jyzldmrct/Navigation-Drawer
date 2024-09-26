@@ -6,23 +6,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import ph.edu.auf.navigationdrawerlesson.R
 import ph.edu.auf.navigationdrawerlesson.databinding.FragmentQuotesOfTheDayBinding
-import ph.edu.auf.navigationdrawerlesson.helpers.QuotesGenerator
+import ph.edu.auf.navigationdrawerlesson.FavoriteQuotesManager
+import ph.edu.auf.navigationdrawerlesson.Quote
 
 class QuotesOfTheDayFragment : Fragment() {
-
     private var _binding: FragmentQuotesOfTheDayBinding? = null
     private val binding get() = _binding!!
-    private lateinit var quotesGenerator: QuotesGenerator
-    private var currentQuote: String = ""
+    private var listener: OnOpenDrawerListener? = null
+
+    interface OnOpenDrawerListener {
+        fun onOpenDrawer()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnOpenDrawerListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnOpenDrawerListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentQuotesOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -30,50 +39,52 @@ class QuotesOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize QuotesGenerator and get the first random quote
-        quotesGenerator = QuotesGenerator.generateAllQuotes().build()
-        currentQuote = quotesGenerator.getRandomQuote()
-        binding.txtQuoteOfDay.text = currentQuote
 
-        // Set up the button to randomize the quote
-        binding.btnRandomizeQuote.setOnClickListener {
-            currentQuote = quotesGenerator.getRandomQuote()
-            binding.txtQuoteOfDay.text = currentQuote
+        binding.btnOpenDrawer.setOnClickListener {
+            listener?.onOpenDrawer()
+
+            binding.btnSaveQuoteOfTheDay.setOnClickListener (View.OnClickListener {
+                val quote = binding.txtQuoteOfTheDay.text.toString()
+                FavoriteQuotesManager.addQuote(Quote(quote, ""))
+            })
+
         }
 
-        // Set up the button to save/remove the quote from favorites
-        binding.btnFavoriteQuote.setOnClickListener {
-            toggleFavoriteQuote(currentQuote)
+        val quotesOfTheDay = listOf(
+            "Sometimes the hardest part is letting go of what we thought would happen.",
+            "Love isn't always easy, but it's always worth fighting for.",
+            "We create our own paths; it's up to us to decide where they lead.",
+            "It's the little moments that make the biggest impact on our lives.",
+            "True connection comes from being honest with ourselves and each other."
+        )
+
+        var currentQuote: String? = null
+
+        fun displayRandomQuote() {
+            currentQuote = quotesOfTheDay.random()
+            binding.txtQuoteOfTheDay.text = currentQuote
         }
-    }
 
-    /**
-     * Toggles saving/removing the current quote from the favorites list using SharedPreferences
-     */
-    private fun toggleFavoriteQuote(quote: String) {
-        val sharedPreferences = activity?.getSharedPreferences("FavoriteQuotes", Context.MODE_PRIVATE)
-        val editor = sharedPreferences?.edit()
+        displayRandomQuote()
 
-        // Retrieve current favorites from SharedPreferences
-        val favoriteQuotes = sharedPreferences?.getStringSet("favorites", mutableSetOf()) ?: mutableSetOf()
+        binding.btnRandomizeQuoteOfTheDay.setOnClickListener {
+            displayRandomQuote()
+        }
 
-        if (favoriteQuotes.contains(quote)) {
-            // If the quote is already in favorites, remove it
-            favoriteQuotes.remove(quote)
-            editor?.putStringSet("favorites", favoriteQuotes)?.apply()
-            Toast.makeText(requireContext(), "Quote removed from favorites", Toast.LENGTH_SHORT).show()
-            binding.btnFavoriteQuote.text = "Save to Favorites"
-        } else {
-            // Add the current quote to the favorites
-            favoriteQuotes.add(quote)
-            editor?.putStringSet("favorites", favoriteQuotes)?.apply()
-            Toast.makeText(requireContext(), "Quote added to favorites", Toast.LENGTH_SHORT).show()
-            binding.btnFavoriteQuote.text = "Remove from Favorites"
+        binding.btnSaveQuoteOfTheDay.setOnClickListener {
+            currentQuote?.let { quote ->
+                FavoriteQuotesManager.addQuote(Quote(quote, ""))
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 }
