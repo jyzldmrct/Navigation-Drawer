@@ -1,0 +1,54 @@
+package ph.edu.auf.navigationdrawerlesson.fragments
+
+import android.content.Context
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import ph.edu.auf.navigationdrawerlesson.databinding.FragmentHomeBinding
+
+class HomeFragment : Fragment() {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    private var listener: OnOpenDrawerListener? = null
+
+    interface OnOpenDrawerListener {
+        fun onOpenDrawer()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnOpenDrawerListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnOpenDrawerListener")
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnOpenDrawer.setOnClickListener {
+            listener?.onOpenDrawer()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+}
